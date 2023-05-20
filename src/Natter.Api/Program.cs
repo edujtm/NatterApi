@@ -1,5 +1,6 @@
 using Npgsql;
 using System.Data;
+using Natter.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,14 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddUseCases();
+
+builder.Services.Configure<RouteOptions>(options =>
+{
+    options.LowercaseUrls = true;
+});
+
 
 // TODO: move to infrastructure project
 var connString = builder.Configuration.GetConnectionString("DbConn");
