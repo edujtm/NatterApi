@@ -1,3 +1,5 @@
+using FluentValidation;
+
 using Natter.Shared.Architecture;
 using Natter.Domain.Entities;
 using Natter.Domain.Repositories;
@@ -29,6 +31,10 @@ public class CreateSpace : IUseCase
 
     public async Task<Response> Handle(Request request)
     {
+        var validator = new CreateSpaceValidator();
+
+        validator.ValidateAndThrow(request);
+        var result = validator.Validate(request);
 
         var space = new Space
         {
