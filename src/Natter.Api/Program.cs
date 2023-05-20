@@ -1,12 +1,13 @@
 using Npgsql;
 using System.Data;
 
+using Natter.Api.Config;
 using Natter.Application;
 using Natter.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connString = builder.Configuration.GetConnectionString("DbConn");
+var dbOptions = builder.Configuration.GetSection("Database").Get<DatabaseOptions>();
 
 // Add services to the container.
 
@@ -16,7 +17,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddUseCases();
-builder.Services.AddDbAccess(connString);
+builder.Services.AddDbAccess(dbOptions.ConnectionString);
 builder.Services.AddRepositories();
 
 builder.Services.Configure<RouteOptions>(options =>
@@ -24,8 +25,6 @@ builder.Services.Configure<RouteOptions>(options =>
     options.LowercaseUrls = true;
 });
 
-
-// TODO: move to infrastructure project
 
 var app = builder.Build();
 
