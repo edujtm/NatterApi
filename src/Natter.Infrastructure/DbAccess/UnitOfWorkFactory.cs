@@ -1,5 +1,4 @@
-using System.Data;
-using Npgsql;
+using System.Data.Common;
 using Natter.Shared.Architecture;
 
 namespace Natter.Infrastructure.DbAccess;
@@ -7,17 +6,17 @@ namespace Natter.Infrastructure.DbAccess;
 
 public class UnitOfWorkFactory : IUnitOfWorkFactory, IConnectionFactory
 {
-    private readonly NpgsqlConnection _connection;
+    private readonly DbConnection _connection;
     private UnitOfWork? _unitOfWork;
 
     private bool IsUnitOfWorkOpen => !(_unitOfWork == null || _unitOfWork.IsDisposed);
 
-    public UnitOfWorkFactory(NpgsqlConnection connection)
+    public UnitOfWorkFactory(DbConnection connection)
     {
         _connection = connection;
     }
 
-    public IDbConnection GetConnection()
+    public DbConnection GetConnection()
     {
         if (!IsUnitOfWorkOpen)
         {

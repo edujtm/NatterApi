@@ -17,6 +17,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddUseCases();
 builder.Services.AddDbAccess(connString);
+builder.Services.AddRepositories();
 
 builder.Services.Configure<RouteOptions>(options =>
 {

@@ -1,4 +1,4 @@
-using Npgsql;
+using System.Data.Common;
 
 using Natter.Shared.Architecture;
 
@@ -7,12 +7,12 @@ namespace Natter.Infrastructure.DbAccess;
 
 public class UnitOfWork : IUnitOfWork
 {
-    private readonly NpgsqlTransaction _transaction;
-    public NpgsqlConnection Connection { get; }
+    private readonly DbTransaction _transaction;
+    public DbConnection Connection { get; }
 
     public bool IsDisposed { get; private set; } = false;
 
-    public UnitOfWork(NpgsqlConnection connection)
+    public UnitOfWork(DbConnection connection)
     {
         Connection = connection;
         _transaction = Connection.BeginTransaction();
