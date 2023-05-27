@@ -2,6 +2,7 @@ using Npgsql;
 using System.Data;
 
 using Natter.Api.Config;
+using Natter.Api.Middleware;
 using Natter.Application;
 using Natter.Infrastructure;
 
@@ -34,6 +35,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseSecurityHeaders();
 
 app.UseHttpsRedirection();
 
