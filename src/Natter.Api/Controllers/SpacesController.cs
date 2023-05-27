@@ -1,26 +1,19 @@
+namespace Natter.Api.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
 using Natter.Application.Spaces;
-
-namespace Natter.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
 public class SpacesController : Controller
 {
 
-    private CreateSpace _createSpace;
+    private readonly CreateSpace _createSpace;
 
     public SpacesController(
         CreateSpace createSpace
-    )
-    {
-        _createSpace = createSpace;
-    }
+    ) => this._createSpace = createSpace;
 
     [HttpPost]
-    public async Task<IActionResult> CreateSpace(CreateSpace.Request request)
-    {
-        return Ok(await _createSpace.Handle(request));
-    }
+    public async Task<IActionResult> CreateSpace(CreateSpace.Request request) => this.Ok(await this._createSpace.Handle(request));
 }

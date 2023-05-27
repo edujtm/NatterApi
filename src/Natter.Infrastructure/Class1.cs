@@ -1,4 +1,4 @@
-﻿namespace Natter.Infrastructure;
+namespace Natter.Infrastructure;
 public class Class1
 {
 

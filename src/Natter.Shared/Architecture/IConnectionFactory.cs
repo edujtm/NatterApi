@@ -1,6 +1,5 @@
-using System.Data.Common;
-
 namespace Natter.Shared.Architecture;
+using System.Data.Common;
 
 public interface IConnectionFactory
 {

@@ -13,5 +13,5 @@ public class DatabaseOptions
 
 
     public string ConnectionString
-        => $"User ID={User};Password={Password};Database={Database};Host={Host};Port={Port}";
+        => $"User ID={this.User};Password={this.Password};Database={this.Database};Host={this.Host};Port={this.Port}";
 }

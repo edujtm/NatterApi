@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "Formatting files"
+dotnet format
+exit 0

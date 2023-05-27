@@ -1,7 +1,6 @@
+namespace Natter.Domain.Repositories;
 
 using Natter.Domain.Entities;
-
-namespace Natter.Domain.Repositories;
 
 public interface ISpaceRepository
 {

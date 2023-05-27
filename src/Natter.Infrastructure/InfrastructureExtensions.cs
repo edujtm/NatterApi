@@ -1,12 +1,11 @@
+namespace Natter.Infrastructure;
 using System.Data.Common;
 using Microsoft.Extensions.DependencyInjection;
-using Npgsql;
 using Natter.Domain.Repositories;
-using Natter.Shared.Architecture;
 using Natter.Infrastructure.DbAccess;
 using Natter.Infrastructure.DbAccess.Repositories;
-
-namespace Natter.Infrastructure;
+using Natter.Shared.Architecture;
+using Npgsql;
 
 
 public static class InfrastructureExtensions
@@ -34,8 +33,5 @@ public static class InfrastructureExtensions
         });
     }
 
-    public static void AddRepositories(this IServiceCollection services)
-    {
-        services.AddTransient<ISpaceRepository, SpaceRepository>();
-    }
+    public static void AddRepositories(this IServiceCollection services) => services.AddTransient<ISpaceRepository, SpaceRepository>();
 }

@@ -1,10 +1,7 @@
-using Npgsql;
-using System.Data;
 using AspNetCoreRateLimit;
-
 using Natter.Api.Config;
-using Natter.Api.Middleware;
 using Natter.Api.Filters;
+using Natter.Api.Middleware;
 using Natter.Application;
 using Natter.Infrastructure;
 
@@ -15,10 +12,7 @@ var dbOptions = builder.Configuration.GetSection("Database").Get<DatabaseOptions
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddMvc(options =>
-{
-    options.Filters.Add<ExceptionHandlerFilter>();
-});
+builder.Services.AddMvc(options => options.Filters.Add<ExceptionHandlerFilter>());
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -32,10 +26,7 @@ builder.Services.AddUseCases();
 builder.Services.AddDbAccess(dbOptions.ConnectionString);
 builder.Services.AddRepositories();
 
-builder.Services.Configure<RouteOptions>(options =>
-{
-    options.LowercaseUrls = true;
-});
+builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
 
 
 var app = builder.Build();

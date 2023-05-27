@@ -4,12 +4,9 @@ namespace Natter.Api.Middleware;
 
 public class SecurityHeadersMiddleware
 {
-    private RequestDelegate _next;
+    private readonly RequestDelegate _next;
 
-    public SecurityHeadersMiddleware(RequestDelegate next)
-    {
-        _next = next;
-    }
+    public SecurityHeadersMiddleware(RequestDelegate next) => this._next = next;
 
     public async Task Invoke(HttpContext context)
     {
@@ -25,6 +22,6 @@ public class SecurityHeadersMiddleware
             return Task.FromResult(0);
         }, context);
 
-        await _next(context);
+        await this._next(context);
     }
 }

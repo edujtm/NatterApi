@@ -1,37 +1,30 @@
+namespace Natter.Infrastructure.DbAccess;
 using System.Data.Common;
 
 using Natter.Shared.Architecture;
 
-namespace Natter.Infrastructure.DbAccess;
-
 
 public class UnitOfWork : IUnitOfWork
 {
-    private readonly DbTransaction _transaction;
+    private readonly DbTransaction transaction;
     public DbConnection Connection { get; }
 
-    public bool IsDisposed { get; private set; } = false;
+    public bool IsDisposed { get; private set; }
 
     public UnitOfWork(DbConnection connection)
     {
-        Connection = connection;
-        _transaction = Connection.BeginTransaction();
+        this.Connection = connection;
+        this.transaction = this.Connection.BeginTransaction();
     }
 
-    public async Task RollbackAsync()
-    {
-        await _transaction.RollbackAsync();
-    }
+    public async Task RollbackAsync() => await this.transaction.RollbackAsync();
 
-    public async Task CommitAsync()
-    {
-        await _transaction.CommitAsync();
-    }
+    public async Task CommitAsync() => await this.transaction.CommitAsync();
 
     public void Dispose()
     {
-        _transaction?.Dispose();
+        this.transaction?.Dispose();
 
-        IsDisposed = true;
+        this.IsDisposed = true;
     }
 }
