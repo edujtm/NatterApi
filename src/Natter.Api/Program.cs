@@ -1,5 +1,6 @@
 using Npgsql;
 using System.Data;
+using AspNetCoreRateLimit;
 
 using Natter.Api.Config;
 using Natter.Api.Middleware;
@@ -22,6 +23,11 @@ builder.Services.AddMvc(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddMemoryCache();
+builder.Services.Configure<IpRateLimitOptions>(builder.Configuration.GetSection("IpRateLimiting"));
+builder.Services.AddInMemoryRateLimiting();
+builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+
 builder.Services.AddUseCases();
 builder.Services.AddDbAccess(dbOptions.ConnectionString);
 builder.Services.AddRepositories();
@@ -42,6 +48,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseSecurityHeaders();
+//app.UseIpRateLimiting();
+app.UseMiddleware<CustomIpRateLimiterMiddleware>();
 
 app.UseHttpsRedirection();
 
