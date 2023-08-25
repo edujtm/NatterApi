@@ -2,4 +2,5 @@
 **/obj
 **/bin
 **/.vscode
+!**/.vscode/launch.json
 .env
