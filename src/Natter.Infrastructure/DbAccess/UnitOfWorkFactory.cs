@@ -35,5 +35,5 @@ public class UnitOfWorkFactory : IUnitOfWorkFactory, IConnectionFactory, IDispos
         return _unitOfWork;
     }
 
-    public void Dispose() => throw new NotImplementedException();
+    public void Dispose() => GC.SuppressFinalize(this);
 }

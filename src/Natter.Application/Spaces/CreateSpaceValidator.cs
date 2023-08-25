@@ -1,7 +1,7 @@
 namespace Natter.Application.Spaces;
 using FluentValidation;
 
-public class CreateSpaceValidator : AbstractValidator<CreateSpace.Request>
+public class CreateSpaceValidator : AbstractValidator<CreateSpace.CreateSpaceRequest>
 {
     public CreateSpaceValidator()
     {

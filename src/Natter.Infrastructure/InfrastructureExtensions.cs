@@ -1,9 +1,12 @@
 namespace Natter.Infrastructure;
 using System.Data.Common;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using Natter.Domain.Entities;
 using Natter.Domain.Repositories;
 using Natter.Infrastructure.DbAccess;
 using Natter.Infrastructure.DbAccess.Repositories;
+using Natter.Infrastructure.Identity;
 using Natter.Shared.Architecture;
 using Npgsql;
 
@@ -34,4 +37,10 @@ public static class InfrastructureExtensions
     }
 
     public static void AddRepositories(this IServiceCollection services) => services.AddTransient<ISpaceRepository, SpaceRepository>();
+
+    public static void AddIdentityServices(this IServiceCollection services)
+    {
+        services.AddIdentityCore<NatterUser>(options => { });
+        services.AddScoped<IUserStore<NatterUser>, NatterUserStore>();
+    }
 }

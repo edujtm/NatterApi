@@ -6,7 +6,7 @@ using Natter.Shared.Architecture;
 
 public class CreateSpace : IUseCase
 {
-    public record Request
+    public record CreateSpaceRequest
     {
         public string? Name { get; set; }
         public string? Owner { get; set; }
@@ -27,7 +27,7 @@ public class CreateSpace : IUseCase
         _uowFactory = factory;
     }
 
-    public async Task<Response> Handle(Request request)
+    public async Task<Response> Handle(CreateSpaceRequest request)
     {
         var validator = new CreateSpaceValidator();
 
