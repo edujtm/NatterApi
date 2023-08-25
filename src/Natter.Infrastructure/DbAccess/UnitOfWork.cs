@@ -13,18 +13,18 @@ public class UnitOfWork : IUnitOfWork
 
     public UnitOfWork(DbConnection connection)
     {
-        this.Connection = connection;
-        this.transaction = this.Connection.BeginTransaction();
+        Connection = connection;
+        transaction = Connection.BeginTransaction();
     }
 
-    public async Task RollbackAsync() => await this.transaction.RollbackAsync();
+    public async Task RollbackAsync() => await transaction.RollbackAsync();
 
-    public async Task CommitAsync() => await this.transaction.CommitAsync();
+    public async Task CommitAsync() => await transaction.CommitAsync();
 
     public void Dispose()
     {
-        this.transaction?.Dispose();
+        transaction?.Dispose();
 
-        this.IsDisposed = true;
+        IsDisposed = true;
     }
 }

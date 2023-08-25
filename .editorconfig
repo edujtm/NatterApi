@@ -75,9 +75,9 @@ dotnet_analyzer_diagnostic.severity = warning
 # https://docs.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/language-rules#net-style-rules
 [*.{cs,csx,cake,vb,vbx}]
 # "this." and "Me." qualifiers
-dotnet_style_qualification_for_field = true:warning
-dotnet_style_qualification_for_property = true:warning
-dotnet_style_qualification_for_method = true:warning
+dotnet_style_qualification_for_field = false
+dotnet_style_qualification_for_property = false
+dotnet_style_qualification_for_method = false
 dotnet_style_qualification_for_event = true:warning
 # Language keywords instead of framework type names for type references
 dotnet_style_predefined_type_for_locals_parameters_members = true:warning
@@ -172,7 +172,7 @@ dotnet_remove_unnecessary_suppression_exclusions = none:warning
 
 # C# Unnecessary code rules
 [*.{cs,csx,cake}]
-csharp_style_unused_value_expression_statement_preference = discard_variable:suggestion
+csharp_style_unused_value_expression_statement_preference = false
 dotnet_diagnostic.IDE0058.severity = suggestion
 csharp_style_unused_value_assignment_preference = discard_variable:suggestion
 dotnet_diagnostic.IDE0059.severity = suggestion

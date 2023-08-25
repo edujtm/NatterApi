@@ -1,4 +1,5 @@
 namespace Natter.Api.Controllers;
+
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
@@ -12,7 +13,12 @@ public class WeatherForecastController : ControllerBase
 
     private readonly ILogger<WeatherForecastController> _logger;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger) => this._logger = logger;
+    public WeatherForecastController(
+        ILogger<WeatherForecastController> logger
+    )
+    {
+        _logger = logger;
+    }
 
     [HttpGet(Name = "GetWeatherForecast")]
     public IEnumerable<WeatherForecast> Get() => Enumerable.Range(1, 5).Select(index => new WeatherForecast
@@ -22,4 +28,12 @@ public class WeatherForecastController : ControllerBase
         Summary = Summaries[Random.Shared.Next(Summaries.Length)]
     })
         .ToArray();
+
+    [HttpGet("test")]
+    public IActionResult GetHash()
+    {
+
+        var hash = "";
+        return Ok();
+    }
 }

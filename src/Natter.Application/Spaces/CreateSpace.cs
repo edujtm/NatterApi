@@ -23,8 +23,8 @@ public class CreateSpace : IUseCase
 
     public CreateSpace(IUnitOfWorkFactory factory, ISpaceRepository spaceRepository)
     {
-        this._spaceRepository = spaceRepository;
-        this._uowFactory = factory;
+        _spaceRepository = spaceRepository;
+        _uowFactory = factory;
     }
 
     public async Task<Response> Handle(Request request)
@@ -40,9 +40,9 @@ public class CreateSpace : IUseCase
             Owner = request.Owner,
         };
 
-        using var uow = this._uowFactory.Create();
+        using var uow = _uowFactory.Create();
 
-        await this._spaceRepository.CreateSpace(space);
+        await _spaceRepository.CreateSpace(space);
         await uow.CommitAsync();
 
         return new Response

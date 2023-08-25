@@ -21,8 +21,8 @@ public class CustomIpRateLimiterMiddleware : RateLimitMiddleware<IpRateLimitProc
             configuration
         )
     {
-        this._options = options.Value;
-        this._logger = logger;
+        _options = options.Value;
+        _logger = logger;
     }
 
     public override async Task ReturnQuotaExceededResponse(
@@ -32,7 +32,7 @@ public class CustomIpRateLimiterMiddleware : RateLimitMiddleware<IpRateLimitProc
     ) => await httpContext.Response.WriteAsJsonAsync(
             new
             {
-                ErrorMessage = this._options.QuotaExceededMessage ?? "Request quota limit has been exceeded!",
+                ErrorMessage = _options.QuotaExceededMessage ?? "Request quota limit has been exceeded!",
             }
         );
 
@@ -41,7 +41,7 @@ public class CustomIpRateLimiterMiddleware : RateLimitMiddleware<IpRateLimitProc
         ClientRequestIdentity identity,
         RateLimitCounter counter,
         RateLimitRule rule
-    ) => this._logger.LogInformation(
+    ) => _logger.LogInformation(
             "Blocked request from client {ClientIp}, quota {RequestQuantity}/{LimitPeriod} exceeded by {ExceededRequest}!",
             identity.ClientIp,
             rule.Limit,

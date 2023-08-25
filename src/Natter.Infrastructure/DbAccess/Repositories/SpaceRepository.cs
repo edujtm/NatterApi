@@ -9,11 +9,11 @@ public class SpaceRepository : ISpaceRepository
 {
     private readonly IConnectionFactory _connFactory;
 
-    public SpaceRepository(IConnectionFactory factory) => this._connFactory = factory;
+    public SpaceRepository(IConnectionFactory factory) => _connFactory = factory;
 
     public async Task CreateSpace(Space space)
     {
-        var connection = this._connFactory.GetConnection();
+        var connection = _connFactory.GetConnection();
 
         var spaceId = await connection.QuerySingleAsync<int>("SELECT nextval('space_id_seq');");
 
