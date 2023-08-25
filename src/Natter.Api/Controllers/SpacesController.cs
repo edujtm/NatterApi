@@ -15,5 +15,6 @@ public class SpacesController : Controller
     ) => _createSpace = createSpace;
 
     [HttpPost]
-    public async Task<IActionResult> CreateSpace(CreateSpace.Request request) => Ok(await _createSpace.Handle(request));
+    public async Task<IActionResult> CreateSpace(CreateSpace.CreateSpaceRequest request)
+        => Ok(await _createSpace.Handle(request));
 }

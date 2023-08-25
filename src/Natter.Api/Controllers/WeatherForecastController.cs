@@ -15,10 +15,7 @@ public class WeatherForecastController : ControllerBase
 
     public WeatherForecastController(
         ILogger<WeatherForecastController> logger
-    )
-    {
-        _logger = logger;
-    }
+    ) => _logger = logger;
 
     [HttpGet(Name = "GetWeatherForecast")]
     public IEnumerable<WeatherForecast> Get() => Enumerable.Range(1, 5).Select(index => new WeatherForecast
@@ -28,12 +25,4 @@ public class WeatherForecastController : ControllerBase
         Summary = Summaries[Random.Shared.Next(Summaries.Length)]
     })
         .ToArray();
-
-    [HttpGet("test")]
-    public IActionResult GetHash()
-    {
-
-        var hash = "";
-        return Ok();
-    }
 }
